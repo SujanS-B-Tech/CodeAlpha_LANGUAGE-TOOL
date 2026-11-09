@@ -3,53 +3,64 @@
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B.svg)](https://streamlit.io/)
 [![Google Cloud Translation API](https://img.shields.io/badge/Google%20Cloud-Translation%20v2-4285F4.svg)](https://cloud.google.com/translate)
-[![Tests Passing](https://img.shields.io/badge/Tests-100%25%20Passing-success.svg)](https://docs.pytest.org/)
+[![Tests Passing](https://img.shields.io/badge/Tests-22%2F22%20Passing%20(100%25)-success.svg)](https://docs.pytest.org/)
+[![Internship](https://img.shields.io/badge/CodeAlpha-Internship%20Task-orange.svg)](https://codealpha.tech/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**LinguaBridge** is a professional, full-featured language translation web application built with Python and Streamlit, connecting directly to the official **Google Cloud Translation API (v2 REST API)**. Engineered for high reliability, clean architecture, and intuitive user experience, LinguaBridge bridges linguistic gaps across 30+ languages, including major Indian regional languages and global tongues.
+**LinguaBridge** is a professional, full-featured language translation web application built with Python and Streamlit. Developed as part of the **CodeAlpha Internship**, LinguaBridge bridges linguistic gaps across **34+ languages**—with dedicated support for **10 major Indian regional languages** and top global tongues.
+
+The application features a **dual translation architecture**: it works completely **out of the box with zero API key setup** using its Free Translation Engine, and seamlessly connects to the official enterprise **Google Cloud Translation API (v2 REST API)** whenever high-volume enterprise credentials are provided.
 
 ---
 
 ## 🌟 Key Features
 
-1. **Official Google Cloud Integration**: Real-time translation powered by Google Cloud's neural machine translation service.
-2. **30+ Supported Languages**:
-   - **Indian Regional**: Tamil (`ta`), Hindi (`hi`), Telugu (`te`), Kannada (`kn`), Malayalam (`ml`), Marathi (`mr`), Bengali (`bn`), Gujarati (`gu`), Punjabi (`pa`), Urdu (`ur`).
-   - **Global Languages**: English (`en`), French (`fr`), German (`de`), Spanish (`es`), Japanese (`ja`), Chinese Simplified (`zh-CN`), Chinese Traditional (`zh-TW`), Arabic (`ar`), Russian (`ru`), Portuguese (`pt`), Italian (`it`), Korean (`ko`), and more.
-3. **Automatic Language Detection**: Detects source language automatically when "Detect Language (Auto)" is selected.
-4. **Side-by-Side Dual-Panel Layout**: Modern side-by-side interface for intuitive reading, comparison, and review.
-5. **Language & Content Swap (`⇄`)**: One-click swap button that reverses source/target languages and shifts translated output back into the input field for reverse translation checks.
-6. **Live Character & Word Counters**: Real-time character counter (with 5,000 character limit enforcement) and word counter.
-7. **One-Click Clipboard Copy**: Built-in copy mechanism for fast text export.
-8. **Text-to-Speech (TTS) Audio**: Pronunciation playback powered by Google Text-to-Speech (`gTTS`) directly inside the UI.
-9. **Zero Data Loss on Failure**: Preserves user input text intact if an API error, rate limit, or network disconnection occurs.
-10. **Defensive Error Handling**: Clear, user-friendly alert callouts for:
-    - Empty or whitespace input
-    - Identical source and target language selection
-    - Missing API credentials with step-by-step setup assistance
-    - Invalid API keys (HTTP 401/403)
-    - Quota and rate limit exhaustion (HTTP 429)
-    - Network connectivity timeouts
-11. **HTML Entity Decoding**: Automatically unescapes HTML entities returned by the API (such as `&#39;` and `&quot;`) into clean punctuation.
-12. **Comprehensive Automated Test Suite**: Mocked pytest test suite covering 100% of failure modes and validations without incurring API costs.
+1. **Dual Translation Engine Architecture**:
+   - ⚡ **Google Translate Engine (Free Alternative)**: Active out-of-the-box with **no API key or billing required**. Ideal for demonstrations, development, and testing.
+   - 🏢 **Google Cloud Translation API v2 (Official Enterprise)**: Enterprise-grade neural machine translation powered by Google Cloud when an API key is supplied.
+2. **34+ Supported Languages**:
+   - **10 Indian Regional Languages**: Tamil (`ta`), Hindi (`hi`), Telugu (`te`), Kannada (`kn`), Malayalam (`ml`), Marathi (`mr`), Bengali (`bn`), Gujarati (`gu`), Punjabi (`pa`), Urdu (`ur`).
+   - **24 Global Languages**: English (`en`), French (`fr`), German (`de`), Spanish (`es`), Japanese (`ja`), Chinese Simplified (`zh-CN`), Chinese Traditional (`zh-TW`), Arabic (`ar`), Russian (`ru`), Portuguese (`pt`), Italian (`it`), Korean (`ko`), Dutch (`nl`), Turkish (`tr`), Polish (`pl`), Vietnamese (`vi`), Thai (`th`), Indonesian (`id`), Greek (`el`), Hebrew (`he`), Swedish (`sv`), Danish (`da`), Finnish (`fi`), Norwegian (`no`).
+3. **Automatic Language Detection**:
+   - Select **Detect Language (Auto)** (`auto`) to automatically identify the source text language with high confidence.
+4. **Side-by-Side Dual-Panel Interface**:
+   - Modern, responsive card layout with dedicated source and target panels for intuitive side-by-side reading and editing.
+5. **Language & Content Swap (`⇄`)**:
+   - One-click swap button reverses source and target languages and rotates the translated output back into the input box for effortless back-translation verification.
+6. **Live Character & Word Counters**:
+   - Real-time word counter and character counter with a strict **5,000-character ceiling** and visual warning styling.
+7. **One-Click Clipboard Copy**:
+   - Streamlit popover integration with one-click code-block copy functionality for rapid text export.
+8. **Text-to-Speech (TTS) Pronunciation**:
+   - Built-in audio playback powered by Google Text-to-Speech (`gTTS`), enabling users to listen to the translated pronunciation directly inside the UI.
+9. **Zero Data Loss on Failure**:
+   - Preserves user input text intact if an API error, rate limit, or network disconnection occurs.
+10. **Defensive Error Handling & HTML Entity Decoding**:
+    - Automatically decodes escaped HTML entities (such as `&#39;`, `&quot;`, `&amp;`) into clean human-readable punctuation.
+    - Custom exception hierarchy with clear, actionable user alerts for validation errors, authentication failures, quota limits, and timeouts.
+11. **Comprehensive Automated Test Suite**:
+    - 22 mocked `pytest` unit tests covering 100% of failure modes, validation constraints, and audio synthesis without consuming API credits.
 
 ---
 
 ## 🏗 Project Architecture
 
 ```
-language-translation-tool/
+CodeAlpha_LANGUAGE-TOOL/
 │
 ├── .env.example             # Configuration and API key template
 ├── .gitignore               # Strict exclusion of virtualenvs, secrets, caches
+├── LICENSE                  # MIT License
 ├── requirements.txt         # Production and testing dependencies
 ├── config.py                # Environment loader, constants, and language mappings
 ├── translator.py            # Translation engine, validation, API requests, and TTS
-├── app.py                   # Streamlit frontend with modern UI components
+├── app.py                   # Streamlit frontend with modern dual-panel UI
+├── start.bat                # Windows Command Prompt one-click launcher
+├── start.ps1                # Windows PowerShell one-click launcher
 │
 ├── tests/
 │   ├── __init__.py
-│   └── test_translator.py   # Unit test suite with mocked Google Cloud API responses
+│   └── test_translator.py   # Complete 22-test unit test suite
 │
 └── README.md                # Complete documentation and setup guide
 ```
@@ -58,103 +69,117 @@ language-translation-tool/
 
 | File | Purpose |
 |---|---|
-| `config.py` | Securely reads environment variables and Streamlit secrets. Maintains supported language mapping dictionaries and constants. |
-| `translator.py` | Encapsulates the `TranslationService` class, custom exception hierarchy (`ValidationError`, `AuthenticationError`, `QuotaExceededError`, `NetworkError`), Google Cloud REST calls, payload validation, and `gTTS` audio synthesis. |
-| `app.py` | Implements the responsive Streamlit frontend, interactive sidebar/expander setup, dual-panel layout, character counter, swap logic, and audio playback. |
-| `tests/test_translator.py` | Pytest suite validating input constraints, language detection, error classification, and HTML decoding with zero live API calls. |
+| [`config.py`](config.py) | Securely loads environment variables and Streamlit secrets. Ignores template placeholder keys and defines the 34 supported language mappings and limits. |
+| [`translator.py`](translator.py) | Core engine implementing the `TranslationService` class, custom exception hierarchy (`ValidationError`, `AuthenticationError`, `QuotaExceededError`, `NetworkError`, `ApiError`), Google Cloud v2 REST calls, free fallback engine, and `gTTS` speech generation. |
+| [`app.py`](app.py) | Streamlit web application with modern CSS styling, dual-panel layout, character counter, swap logic, TTS player, copy popover, and engine switchers. |
+| [`tests/test_translator.py`](tests/test_translator.py) | Unit test suite validating input rules, error classifications, free provider, HTML decoding, and TTS generation with zero live API calls. |
+| [`start.bat`](start.bat) | Windows batch file to bootstrap `.venv`, install requirements, and run the app. |
+| [`start.ps1`](start.ps1) | PowerShell script to bootstrap `.venv`, install dependencies, and launch Streamlit. |
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### Method 1: One-Click Launch (Easiest)
-Simply double-click **`start.bat`** in the project folder, or run:
+### Method 1: One-Click Batch Launcher (Windows CMD / File Explorer)
+Double-click **`start.bat`** in the project folder, or run:
 ```cmd
 start.bat
 ```
 This script automatically:
-1. Checks for Python 3.9+.
+1. Verifies Python 3.9+ is installed.
 2. Creates the virtual environment (`.venv`) if not present.
-3. Activates the environment and installs all dependencies from `requirements.txt`.
+3. Installs dependencies from `requirements.txt`.
 4. Initializes `.env` from `.env.example` if needed.
-5. Launches the LinguaBridge Streamlit application in your default browser.
+5. Launches LinguaBridge in your default web browser at `http://localhost:8501`.
 
 ---
 
-### Method 2: Manual PowerShell Setup
-Follow these exact steps if you prefer running manually:
+### Method 2: One-Click PowerShell Launcher
+Right-click **`start.ps1`** and select **Run with PowerShell**, or execute:
+```powershell
+.\start.ps1
+```
 
-#### Step 1: Open PowerShell and Navigate to the Directory
+---
+
+### Method 3: Manual Terminal Setup
+
+#### Step 1: Open Terminal and Navigate to Directory
 ```powershell
 cd "d:\PROJECTS\Projects\CODEALPHAINTERN\LANGUAGE TOOL"
 ```
 
-### Step 2: Create a Virtual Environment
+#### Step 2: Create a Virtual Environment
 ```powershell
 python -m venv .venv
 ```
 
-### Step 3: Activate the Virtual Environment
-```powershell
-.venv\Scripts\Activate.ps1
-```
-*(If PowerShell execution policies block script activation, run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` and try again).*
+#### Step 3: Activate the Virtual Environment
+- **Windows (PowerShell)**:
+  ```powershell
+  .venv\Scripts\Activate.ps1
+  ```
+  *(If execution policies block script activation, run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`)*
+- **Windows (Command Prompt)**:
+  ```cmd
+  .venv\Scripts\activate.bat
+  ```
+- **macOS / Linux**:
+  ```bash
+  source .venv/bin/activate
+  ```
 
-### Step 4: Install Dependencies
+#### Step 4: Install Dependencies
 ```powershell
 pip install -r requirements.txt
 ```
 
-### Step 5: Run Automated Unit Tests
-Verify all validation rules and mocked API error handlers pass:
+#### Step 5: Run Automated Unit Tests
 ```powershell
-pytest -v tests/
+pytest -v
 ```
 
-### Step 6: Launch the Streamlit Web Application
+#### Step 6: Launch the Web Application
 ```powershell
 streamlit run app.py
 ```
-Streamlit will start local server hosting the application at:
-```
-http://localhost:8501
-```
+Open your browser at **`http://localhost:8501`**.
 
 ---
 
 ## 🌐 Translation Engines & Providers
 
-LinguaBridge supports two operational modes:
+LinguaBridge features two operational modes selectable via the UI radio button:
 
 1. **⚡ Google Translate Engine (Free Alternative — No API Key Required)**
-   - Enabled by default when no Google Cloud credentials are configured.
-   - Dispatches real-time translations through Google Translate's neural models without requiring an API key or credit card.
-   - Ideal for instant testing, internship evaluation, and demonstrations.
+   - **Active by default** when no Google Cloud API key is configured.
+   - Sends real-time translations via Google's neural models without requiring an API key, billing account, or credit card.
+   - Ideal for internship demonstrations, student reviews, and quick testing.
 
 2. **🏢 Google Cloud Translation API v2 (Official Enterprise — Requires API Key)**
-   - Uses the official Google Cloud Translation API v2 endpoint.
-   - Enterprise security and quota controls with Google Cloud projects.
+   - Connects to Google Cloud's official `https://translation.googleapis.com/language/translate/v2` REST API.
+   - Built for enterprise rate limits, strict uptime SLAs, and project quotas.
 
 ---
 
-## 🔑 Google Cloud Translation API Configuration
+## 🔑 Google Cloud API Key Configuration (Optional)
 
-When using the **Official Enterprise** provider, configure credentials via either:
+If you wish to test with an official Google Cloud Translation API key:
 
 ### Option A: Via `.env` File (Recommended)
-1. In the project root, copy `.env.example` to `.env`:
+1. Copy `.env.example` to `.env`:
    ```powershell
    Copy-Item .env.example .env
    ```
-2. Open `.env` and paste your Google Cloud API Key:
+2. Open `.env` and set your key:
    ```env
    GOOGLE_TRANSLATE_API_KEY=AIzaSyYourActualGoogleCloudApiKeyHere
    ```
 
-### Option B: Direct In-App Session Key
-If you do not wish to edit files, you can launch the app, select **Google Cloud Translation API**, and paste your API key directly into the configuration input box inside the web UI.
+### Option B: Direct In-App Input
+Switch the provider to **Google Cloud Translation API** in the web app UI, expand the configuration drawer, and paste your API key directly for that session.
 
-### Option C: Streamlit Secrets (For Streamlit Community Cloud)
+### Option C: Streamlit Secrets (For Cloud Deployment)
 Create `.streamlit/secrets.toml`:
 ```toml
 GOOGLE_TRANSLATE_API_KEY = "AIzaSyYourActualGoogleCloudApiKeyHere"
@@ -162,61 +187,103 @@ GOOGLE_TRANSLATE_API_KEY = "AIzaSyYourActualGoogleCloudApiKeyHere"
 
 ---
 
-## 🛠 How to Obtain a Google Cloud Translation API Key
-
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. Create a new project (e.g., `linguabridge-translator`).
-3. Ensure **Billing** is enabled for your Google Cloud account (Google provides a free tier with 500,000 free translation characters per month).
-4. Navigate to **APIs & Services > Library**.
-5. Search for **Cloud Translation API** and click **Enable**.
-6. Navigate to **APIs & Services > Credentials**.
-7. Click **+ Create Credentials > API Key**.
-8. Copy your new API key and paste it into `.env`.
-9. *(Optional but Recommended)* Click **Edit API Key** and restrict usage strictly to the **Cloud Translation API**.
-
----
-
 ## 🧪 Automated Testing Details
 
-LinguaBridge includes a unit test suite built with `pytest` and `unittest.mock`. **No real API requests are dispatched during testing**, preventing any charges or quota consumption.
+LinguaBridge includes a unit test suite built with `pytest` and `unittest.mock`. **No real API requests are dispatched during testing**, preventing unintended charges, network reliance, or quota consumption.
 
-To execute tests:
+To run all 22 tests:
 ```powershell
-pytest -v tests/
+pytest -v
 ```
 
-### Test Scenarios Covered
-- `test_empty_input_validation`: Verifies empty input raises `ValidationError`.
-- `test_whitespace_input_validation`: Verifies whitespace input raises `ValidationError`.
-- `test_exceeding_max_characters`: Verifies inputs > 5,000 characters are rejected.
-- `test_identical_source_and_target_languages`: Ensures selecting the same source and target produces an alert.
-- `test_identical_languages_allowed_if_auto`: Ensures "Auto-detect" works even if detected language matches target.
-- `test_unsupported_target_language`: Verifies non-existent target language codes are rejected.
-- `test_unsupported_source_language`: Verifies non-existent source language codes are rejected.
-- `test_missing_api_key`: Verifies that translation without credentials raises `MissingConfigurationError`.
-- `test_auth_error_401`: Verifies HTTP 401 raises `AuthenticationError`.
-- `test_auth_error_403_billing`: Verifies HTTP 403 API disabled/billing error raises `AuthenticationError`.
-- `test_successful_translation_explicit_source`: Validates complete translation flow and payload integrity.
-- `test_html_entity_unescaping`: Verifies HTML entities like `&#39;` and `&quot;` are properly decoded.
-- `test_quota_exceeded_429`: Verifies HTTP 429 quota exhaustion raises `QuotaExceededError`.
-- `test_network_timeout`: Verifies request timeouts raise `NetworkError`.
-- `test_network_connection_error`: Verifies connection drops raise `NetworkError`.
-- `test_malformed_json_response`: Verifies invalid JSON payloads raise `ApiError`.
-- `test_empty_translations_data`: Verifies missing translation lists raise `ApiError`.
-- `test_detect_language_success`: Validates language detection endpoint and confidence score.
-- `test_detect_language_empty_input`: Validates detection rejects empty text.
-- `test_text_to_speech_generation`: Validates text-to-speech audio byte stream synthesis.
+### Complete Test Catalog (22 / 22 Tests)
+
+| # | Test Function | Purpose / Scenario Covered |
+|---|---|---|
+| 1 | `test_empty_input_validation` | Verifies empty string input raises `ValidationError`. |
+| 2 | `test_whitespace_input_validation` | Verifies whitespace-only text raises `ValidationError`. |
+| 3 | `test_exceeding_max_characters` | Verifies inputs > 5,000 characters raise `ValidationError`. |
+| 4 | `test_identical_source_and_target_languages` | Verifies selecting identical source and target raises `ValidationError`. |
+| 5 | `test_identical_languages_allowed_if_auto` | Verifies `auto` does not raise identical language error even if detected matches target. |
+| 6 | `test_unsupported_target_language` | Verifies invalid target language codes are rejected. |
+| 7 | `test_unsupported_source_language` | Verifies invalid source language codes are rejected. |
+| 8 | `test_missing_api_key` | Verifies unconfigured cloud service raises `MissingConfigurationError`. |
+| 9 | `test_auth_error_401` | Verifies HTTP 401 raises `AuthenticationError`. |
+| 10 | `test_auth_error_400_invalid_key` | Verifies HTTP 400 with invalid key message raises `AuthenticationError`. |
+| 11 | `test_free_provider_translation_success` | Validates complete translation flow using the free alternative provider. |
+| 12 | `test_successful_translation_explicit_source` | Validates successful translation, payload structure, and metadata mapping. |
+| 13 | `test_html_entity_unescaping` | Verifies HTML entities (`&#39;`, `&quot;`, `&amp;`) are properly unescaped. |
+| 14 | `test_quota_exceeded_429` | Verifies HTTP 429 quota exhaustion raises `QuotaExceededError`. |
+| 15 | `test_network_timeout` | Verifies network request timeouts raise `NetworkError`. |
+| 16 | `test_network_connection_error` | Verifies connection drops raise `NetworkError`. |
+| 17 | `test_malformed_json_response` | Verifies non-JSON responses from API raise `ApiError`. |
+| 18 | `test_empty_translations_data` | Verifies empty translation arrays raise `ApiError`. |
+| 19 | `test_detect_language_success` | Validates language detection endpoint and confidence score parsing. |
+| 20 | `test_detect_language_empty_input` | Validates detection rejects empty text. |
+| 21 | `test_text_to_speech_empty_text` | Verifies TTS gracefully returns `None` for empty inputs. |
+| 22 | `test_text_to_speech_generation` | Validates TTS synthesis and binary MP3 byte generation. |
 
 ---
 
-## 🛡 Security and Best Practices
+## 🗺 Supported Languages Reference
 
-- **Zero Hardcoded Secrets**: No API keys or tokens are stored in source code.
-- **Strict `.gitignore`**: Protects `.env`, credentials JSON files, virtual environments, and caches from being committed to Git.
-- **Fail-Safe Preserved State**: User input text is retained across failed requests, preventing accidental work loss.
-- **Clean REST Abstraction**: Direct REST integration through `requests` allows complete transparency, precise status code checking, and lightweight execution without bulky dependencies.
+| Code | Language | Native / Script | Group |
+|---|---|---|---|
+| `auto` | Auto-Detection | ✨ Auto-Detect | System |
+| `ta` | Tamil | தமிழ் | Indian Regional |
+| `hi` | Hindi | हिन्दी | Indian Regional |
+| `te` | Telugu | తెలుగు | Indian Regional |
+| `kn` | Kannada | ಕನ್ನಡ | Indian Regional |
+| `ml` | Malayalam | മലയാളം | Indian Regional |
+| `mr` | Marathi | मराठी | Indian Regional |
+| `bn` | Bengali | বাংলা | Indian Regional |
+| `gu` | Gujarati | ગુજરાતી | Indian Regional |
+| `pa` | Punjabi | ਪੰਜਾਬੀ | Indian Regional |
+| `ur` | Urdu | اردو | Indian Regional |
+| `en` | English | English | Global |
+| `es` | Spanish | Español | Global |
+| `fr` | French | Français | Global |
+| `de` | German | Deutsch | Global |
+| `ja` | Japanese | 日本語 | Global |
+| `zh-CN` | Chinese (Simplified) | 简体中文 | Global |
+| `zh-TW` | Chinese (Traditional) | 繁體中文 | Global |
+| `ar` | Arabic | العربية | Global |
+| `ru` | Russian | Русский | Global |
+| `pt` | Portuguese | Português | Global |
+| `it` | Italian | Italiano | Global |
+| `ko` | Korean | 한국어 | Global |
+| `nl` | Dutch | Nederlands | Global |
+| `tr` | Turkish | Türkçe | Global |
+| `pl` | Polish | Polski | Global |
+| `vi` | Vietnamese | Tiếng Việt | Global |
+| `th` | Thai | ไทย | Global |
+| `id` | Indonesian | Bahasa Indonesia | Global |
+| `el` | Greek | Ελληνικά | Global |
+| `he` | Hebrew | עברית | Global |
+| `sv` | Swedish | Svenska | Global |
+| `da` | Danish | Dansk | Global |
+| `fi` | Finnish | Suomi | Global |
+| `no` | Norwegian | Norsk | Global |
+
+---
+
+## 🛡 Security & Best Practices
+
+- **Zero Secret Leakage**: No API keys or credentials are hardcoded into source files.
+- **Placeholder Key Detection**: Automatically identifies unconfigured placeholder values (`your_google_cloud_api_key_here`) and gracefully falls back to the Free Engine.
+- **Comprehensive `.gitignore`**: Protects `.env`, `.venv`, credentials files, and cache directories from being committed to version control.
+- **Preserved User State**: Any network or API failure leaves the user's source text untouched in session state to prevent lost work.
+
+---
+
+## 👨‍💻 Author & Acknowledgements
+
+- **Developer**: Sujan S
+- **Repository**: [CodeAlpha_LANGUAGE-TOOL](https://github.com/SujanS-B-Tech/CodeAlpha_LANGUAGE-TOOL)
+- **Program**: CodeAlpha Internship Program
 
 ---
 
 ## 📄 License
-This project is open-source under the [MIT License](LICENSE).
+
+This project is licensed under the [MIT License](LICENSE).
