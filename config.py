@@ -15,11 +15,14 @@ def get_api_key() -> Optional[str]:
     """
     Retrieve Google Cloud Translation API key from environment variables
     or Streamlit secrets (if running in a Streamlit context).
+    Ignores template placeholder values.
     """
     # 1. Check direct environment variable
     api_key = os.getenv("GOOGLE_TRANSLATE_API_KEY")
     if api_key and api_key.strip():
-        return api_key.strip()
+        val = api_key.strip()
+        if not val.startswith("your_") and not val.startswith("AIzaSy_your_"):
+            return val
 
     # 2. Check Streamlit secrets if available
     try:
@@ -27,7 +30,9 @@ def get_api_key() -> Optional[str]:
         if hasattr(st, "secrets") and "GOOGLE_TRANSLATE_API_KEY" in st.secrets:
             key = st.secrets["GOOGLE_TRANSLATE_API_KEY"]
             if key and key.strip():
-                return key.strip()
+                val = key.strip()
+                if not val.startswith("your_") and not val.startswith("AIzaSy_your_"):
+                    return val
     except Exception:
         pass
 

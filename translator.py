@@ -114,7 +114,11 @@ class TranslationService:
         """Returns True if the current provider is ready to translate."""
         if self.provider == PROVIDER_GOOGLE_FREE:
             return True
-        return bool(self.api_key and self.api_key.strip())
+        if not self.api_key or not self.api_key.strip():
+            return False
+        if self.api_key.startswith("your_") or self.api_key.startswith("AIzaSy_your_"):
+            return False
+        return True
 
     def validate_request(
         self,
